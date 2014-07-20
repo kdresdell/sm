@@ -1,0 +1,309 @@
+
+// DynamiX - Premium WordPress Theme
+
+---------------------------------------------------
+
+:: Changelog
+
+---------------------------------------------------
+
+---------------------------------------------------
+
+:: VERSION 4.0.8 – ( 12 / 06 / 14 )
+
+---------------------------------------------------
+
+- Visual Composer Update v4.2.2
+- Extra Font Icons ( Font Awesome Update )
+- Page Comments Fix
+- Revolution Slider Update
+- BuddyPress Hidden Registration Fields Fix
+- Page Skin Select Fix
+- Visual Composer Updates / Activation Notifications Disabled
+
+
+---------------------------------------------------
+
+:: VERSION 4.0.7 – ( 30 / 05 / 14 )
+
+---------------------------------------------------
+
+- Visual Composer Update v4.2.1
+- bbPress styling fix ( TinyMCE )
+- Stage Gallery Title Overlay Fix
+- Flickr Fix
+
+---------------------------------------------------
+
+:: VERSION 4.0.6 – ( 20 / 05 / 14 )
+
+---------------------------------------------------
+
+- Visual Composer Update ( 4.1.3.1 )
+- Editor Quick Shortcode Fix for Lists
+- Comments Fix
+- Parallax with Revolution Slider Fix
+- Fixed Social Media Permalinks in Posts
+- bbPress styling Fix
+
+---------------------------------------------------
+
+:: VERSION 4.0.5 – ( 6 / 05 / 14 )
+
+---------------------------------------------------
+
+- Visual Composer Update ( 4.1.2 )
+- Revolution Slider Update
+- Editor Quick Shortcode Fix for WP 3.9
+- BuddyPress styling fixes
+- Tabs display full width fix
+
+---------------------------------------------------
+
+:: VERSION 4.0.4 – ( 18 / 04 / 14 )
+
+---------------------------------------------------
+
+- Visual Composer Update ( 4.1 - 4.1.1 currently contains bugs )
+- Revolution Slider Update
+- WP 3.9 Bug Fixes 
+
+---------------------------------------------------
+
+:: VERSION 4.0.3 – ( 14 / 04 / 14 )
+
+---------------------------------------------------
+
+- Visual Composer Update
+- Revolution Slider Update
+- RESS max image size for mobile and tablets
+
+---------------------------------------------------
+
+:: VERSION 4.0.2 – ( 24 / 01 / 14 )
+
+---------------------------------------------------
+
+- Visual Composer Update
+- Wide Row / Parallax Full Width Fix
+- Postmeta Author Name Fix
+- Recent Post Excerpt Fix
+- White Text Style ( VC  > Text Block > Styles )
+- WP 3.8.x Admin Bar Fix
+- Mobile Menu Trigger Fix
+
+---------------------------------------------------
+
+:: VERSION 4.0.1 – ( 30 / 12 / 13 )
+
+---------------------------------------------------
+
+- Updated Revolution Slider 
+- Improved BuddyPress integration
+- Improved BuddyPress styling
+- iPad Menu Fix
+- Implemented Rich Snippets
+
+---------------------------------------------------
+
+:: VERSION 4.0 – ( 16 / 12 / 13 )
+
+---------------------------------------------------
+
+- Visual Composer Update
+- Re-worked all existing Skins
+- Parallax and Custom Row Backgrounds
+- Font Awesome Icons Integration
+- Font Icon Shortcode ( Choose from 369 icons )
+- Updated Theme Graphics
+- Sticky Header Fix
+- New Mobile Menu Integration
+- Improved SEO Page Title
+- Updated Admin Interface 
+
+
+---------------------------------------------------
+
+:: VERSION 3.2.1 – ( 21 / 11 / 13 )
+
+---------------------------------------------------
+
+- Revolution version 4.0.6 Update ( DynamiX/plugins/ ) - Also Fixes Ubermenu Issue
+- Fix Retina Scroll Logo
+- Social Sharing Toolkit Plugin Admin Compatibility 
+
+---------------------------------------------------
+
+:: VERSION 3.2 – ( 03 / 11 / 13 )
+
+---------------------------------------------------
+
+- Load plugins remotely via TGM 
+- Portfolio Post Limit Field
+- Breadcrumbs Fix
+- iSlider Thumbnail Resize
+- Load core JS file in the footer
+- Posts Limit Fix For Visual Composer Galleries
+- Fix Retina ( Desktop ) Logo
+- Fix Logo Scroll Resize
+
+
+---------------------------------------------------
+
+:: VERSION 3.1.2 – ( 16 / 09 / 13 )
+
+---------------------------------------------------
+
+- Add CSS Classes to Toggle / Styled Box
+- Shortcodes for Text Editor
+- Improved Slide Set performance
+- Mobile Navigation Location ( Set a menu for mobile devices )
+- Visual Composer Portfolio Sort / Excerpt Options
+- Stage Gallery - One Slide Video Fix
+- Sticky Menu Admin Bar Fix
+
+
+---------------------------------------------------
+
+:: VERSION 3.1.1 – ( 09 / 08 / 13 )
+
+---------------------------------------------------
+
+- Textdomain Fix
+- Pie Chart
+- Mobile Sidebar Align Fix
+- BuddyPress Sidebar Fix ( Sidebar, Content, Sidebar )
+- Twitter Solution + API Options
+- First Image Detection Option
+- Improved Localization
+- Menu Animation Improvement
+- Woocommece styling improvement
+
+
+---------------------------------------------------
+
+:: VERSION 3.1 – ( 30 / 07 / 13 )
+
+---------------------------------------------------
+
+- Sticky Menu Option
+- Wide Row Class
+- Parent Menu Highlight
+- Revolution Slider Update
+- One-Click Install
+- New Demo Content
+- Sidebar content is now set after main content
+- Improved Localization 
+- BBPress Layout Fix
+- Twitter Icon Update
+- Fixed Visual Composer Bleeding into Content Issue
+- Fixed PHP 5.4 Errors with mapper.php 
+- Social Icon in VC Fix
+
+
+---------------------------------------------------
+
+:: VERSION 3.0.5 – ( 11 / 07 / 13 )
+
+---------------------------------------------------
+
+- Added Accordion Active Tab
+- WPML Flag Area
+- Flickr slow loading Fix
+- Stage Gallery Visual Composer Timeout Fix
+- Visual Composer Update  ( Fixes PHP errors )
+- Content Animator in Stage Gallery Fix
+- Image Effect Shortcode CSS Class Fix
+
+---------------------------------------------------
+
+:: VERSION 3.0.4 – ( 26 / 06 / 13 )
+
+---------------------------------------------------
+
+- Animate Elements onto Page
+- Slide Set Multiple Video Fix
+- Slide Sets removed from Search Results
+- Gallery ID fix
+- Page / Post ID Data Source Type
+- StyledBox Heights
+- LinkedIn Social Icon Share Fix
+- Visual Composer Fix Product Category / Tag Data Source
+- Revolution Slider Button Fix
+- Text Block Edit ( Visual Composer ) Fix
+- Theme Options Restore Fix
+- Twitter Update now using 1.1 API
+- iPad / iPhone Landscape Fix
+- JW Player Video within Galleries Improved
+
+---------------------------------------------------
+
+:: VERSION 3.0.3 – ( 30 / 05 / 13 )
+
+---------------------------------------------------
+
+- Progress / Graph Bar Feature
+- Add WordPress Widgets to a Page
+- Visual Composer Update - Vastly Improved Performance
+- Multiple Slide Set fix
+- Author "Display name publicly as" option ( Posts / Header )
+- JW Player, YouTube, Vimeo Video Stops on Gallery Slide Change
+- Accordion Shortcode Mini-titles Fix
+- Post Gallery Sort / Orderby Fix
+- Simpler Default Skin Option
+
+---------------------------------------------------
+
+:: VERSION 3.0.2 – ( 02 / 05 / 13 )
+
+---------------------------------------------------
+
+- Branding Display Toggle
+- Visual Composer Gallery ID Fix
+- Better RTL support
+- Revolution Slider in Visual Composer
+- Author Bio Fix with Woocommerce
+- Audio support in JW player lightbox
+- Child-Theme BuddyPress / bbPress support
+- Improved Search Page
+- Visual Composer Update
+- Revolution Slider Update
+
+---------------------------------------------------
+
+:: VERSION 3.0.1 – ( 21 / 04 / 13 )
+
+---------------------------------------------------
+
+- BuddyPress 1.7 Support
+- Retina Branding Support  ( See Theme Options > Header )
+- JW Player Lightbox Support
+- Woocommerce Page Layout Admin ( See Theme Options > Woocommerce )
+- Full Screen Video Background Support
+- Read More Disable ( Slide Sets ) Fix
+- Standard Heading Font Family Fix
+- JS Composer PHP 5.4 Fix
+- Image Resizing Fix ( affected servers only ) 
+- Drop Panel / Search Display Fix
+- Theme Options export / import Function
+- Custom Button URL – Fix
+- Content Animator in Stage Gallery – Fix
+
+
+
+---------------------------------------------------
+
+:: VERSION 3.0 – ( 08 / 04 / 13 )
+
+---------------------------------------------------
+
+- Complete New Admin
+- Simpler, more intuitive set of Page / Post options
+- Page Builder ( Extended version of Visual Composer )
+- New Skin Customizer ( Extends the WP Customizer function )
+- New Gallery Slide Set Manager
+- Replaced Timthumb with an WP Image Resizer Script
+- Revolution Slider
+- Black & White Image Effect
+- Responsive Framework Update
+- PHP 5.4 Compliant

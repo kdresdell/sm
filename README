@@ -1,16 +1,23 @@
 Structure propose du repertoire :
 
-BIN 
+bin 
 - Les scripts d'installations
 - firewall
 - NGINX
 - MySQL
 - FAIL2BAN
+- backup
+- Failover
 
-WP
+wp
 - les themes Wordpress et Woocommerce à jour
 - le plugins utilisés
 
-CONF
+conf
 - fichier de configirations
--
+- MySQL 
+- Nginx
+
+dev
+
+- code custom LINK ERP, CRM client

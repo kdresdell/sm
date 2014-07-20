@@ -1,0 +1,25 @@
+.ui-btn-up-c.documentation_link,
+.ui-btn-hover-c.documentation_link:hover,
+div.updated.get_started {
+color:#fff !important;
+text-shadow:0  1px  0  #4cb16e ;
+border:1px solid #5fd085 ;
+background:#58c57a ;
+background-image:-webkit-gradient(linear,left top,left bottom,from( #71e29e ),to( #5fd085 ));
+background-image:-webkit-linear-gradient( #71e29e,#5fd085 );
+background-image:   -moz-linear-gradient( #71e29e,#5fd085 );
+background-image:    -ms-linear-gradient( #71e29e,#5fd085 );
+background-image:     -o-linear-gradient( #71e29e,#5fd085 );
+background-image:        linear-gradient( #71e29e,#5fd085 );}
+
+div.updated.get_started {padding:10px;font-size:14px;margin:15px 0 5px 0;}
+div.updated.get_started a {color:#fff;}
+
+.highlight-admin-text {color:#EA4B24;}
+
+#section-droppanel_button_align {display:none;}
+.mce-i-themeva_shortcodes {background:url(../js/tinymce/themeva.png) no-repeat center center !important;}
+
+select.wpb_vc_param_value.arrow,
+.wpb_vc_param_value .arrow,
+.wpb_vc_param_value .arrow::after {position:relative !important;bottom:auto !important;left:auto !important;}

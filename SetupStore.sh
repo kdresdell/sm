@@ -32,11 +32,22 @@ VERSION="0.1"
 # sed -i "s/^Port 22$/Port 2222/g" /etc/ssh/sshd_config
 # service ssh restart 
 
+# header "Installateur de boutique en ligne"
+# title "Installation du Firewall"
+# cp -i bin/firewall.sh /etc/
+# title "Activation du firewall au reboot"
+# chmod +x /etc/firewall.sh
+# sed -i '\/etc\/firewall.sh/d' /etc/rc.local
+# sed -i -e '$i \/etc/firewall.sh' /etc/rc.local
+
 header "Installateur de boutique en ligne"
-title "Installation du Firewall"
-cp -i bin/firewall.sh /etc/
-title "Activation du firewall au reboot"
-chmod +x /etc/firewall.sh
-sed -i '\/etc\/firewall.sh/d' /etc/rc.local
-sed -i -e '$i \/etc/firewall.sh' /etc/rc.local
+title "Installation du Serveur Web NGINX"
+apt-get install nginx
+
+header "Installateur de boutique en ligne"
+title "Installation du Serveur de BD MySQL"
+apt-get install mysql-server
+mysql_install_db
+#mysql_secure_installation
+
 

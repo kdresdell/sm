@@ -58,6 +58,7 @@
       $IPTABLES -A INPUT -p tcp --dport 2222 -j ACCEPT
 
       $IPTABLES -A INPUT --source 207.134.128.166 -j ACCEPT
+      $IPTABLES -A INPUT --source 207.134.128.6 -j ACCEPT
       $IPTABLES -A INPUT -j LOG --log-prefix "FW INPUT NoAuth!"
 
 

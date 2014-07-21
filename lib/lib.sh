@@ -13,7 +13,7 @@ function header {
 
   #EMPTY_SCREEN="---------1---------1---------1---------1---------1---------1---------1---------1"
   EMPTY_SCREEN="                                                                                "
-        TEASER="    DRESDELL NETWORK, INC                               www.dresdell.com         "
+        TEASER="    DRESDELL NETWORK, INC                              www.dresdell.com         "
 
   TITLE=$1
 
@@ -70,7 +70,7 @@ function title {
   CHAR_NUMBER=${#TITLE}
   let SPACE_LEFT=74-$CHAR_NUMBER
 
-  echo -en '\E[9;31m'"  + $TITLE"
+  echo -en '\E[9;31m'"+ $TITLE"
 
   i=4
   while [ $i -le $SPACE_LEFT ]; do

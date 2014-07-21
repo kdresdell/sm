@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 #
 #  Copyright (C) 2014
 #  Ken Dresdell
@@ -9,34 +9,6 @@
 
 
 source lib/lib.sh
-
-
-
-function install_A {
-
-  header "Installation PBX-IP KDC $VERSION" 
-
-  title "Installation de bash"
-  pkg_add -r bash 
-  # >>$PBX_INSTALL_LOG 2>>$PBX_ERROR_LOG
-
-  title "Installation de rsync"
-  pkg_add -r rsyn 
-  # >>$PBX_INSTALL_LOG 2>>$PBX_ERROR_LOG
-
-
-  title "Install /etc/asterisk/manager.conf"
-  rm -rf /etc/asterisk/manager.conf
-  cp $CONF/manager.conf /etc/asterisk/manager.conf
-
-
-}
-
-
-
-
-
-
 ##################################################################
 #
 #
@@ -47,16 +19,24 @@ function install_A {
 
 
 
-  VERSION="1.0"
-  
-  ASTERISK="asterisk-1.4.26.1"
-  GUI="asterisk-gui"
-  SOURCES="/root/emPBXIP/SOURCES/"
-  CONF="/root/emPBXIP/CONF"
+VERSION="0.1"
 
-  PBX_INSTALL_LOG="/root/PBX_INSTALL_LOG"
-  PBX_ERROR_LOG="/root/PBX_ERROR_LOG"
+# header "Installateur de boutique en ligne"
+# title "Mise a jour du OS"
+# apt-get update  -qy
+# apt-get upgrade -qy
 
+# header "Installateur de boutique en ligne"
+# title "Setup SSH-Server on TCP 222"
+# apt-get install openssh-server -qy
+# sed -i "s/^Port 22$/Port 2222/g" /etc/ssh/sshd_config
+# service ssh restart 
 
+header "Installateur de boutique en ligne"
+title "Installation du Firewall"
+cp -i bin/firewall.sh /etc/
+title "Activation du firewall au reboot"
+chmod +x /etc/firewall.sh
+sed -i '\/etc\/firewall.sh/d' /etc/rc.local
+sed -i -e '$i \/etc/firewall.sh' /etc/rc.local
 
-  install_asterisk

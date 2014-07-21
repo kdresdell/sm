@@ -13,7 +13,7 @@ function header {
 
   #EMPTY_SCREEN="---------1---------1---------1---------1---------1---------1---------1---------1"
   EMPTY_SCREEN="                                                                                "
-        TEASER="    DRSDELL NETWORK, INC     www.dresdell.com "
+        TEASER="    DRESDELL NETWORK, INC                               www.dresdell.com         "
 
   TITLE=$1
 

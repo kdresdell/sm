@@ -21,6 +21,10 @@ source lib/lib.sh
 
 VERSION="0.1"
 
+# Ajouter mode interractif pour debuter
+#Y/N 
+
+
 #header "Installateur de boutique en ligne"
 #title "Mise a jour du OS"
 #apt-get update  -qy
@@ -55,13 +59,12 @@ title "Installation PHP5, ET MODULES"
 sudo apt-get install php5-fpm php5-mysql php5-gd libssh2-php -qy
 title "Correction du fichier php.ini pathinfo=0"
 sed -i "s/^;cgi.fix_pathinfo=1$/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
-echo "<?php
-phpinfo();
-?>" > /usr/share/nginx/html/test.php
+
+# Backup des fichiers d'origine Nginx nginx.conf default
+# copie des fichiers optimisés
 
 
-title "Correction du default php"
-sed -i "s/index index.html index.htm;$/index index.php index.html index.htm;/g" /etc/nginx/sites-available/default
+
 
 title "Restart service PHP & NGINX"
 service php5-fpm restart

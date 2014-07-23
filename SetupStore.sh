@@ -54,19 +54,49 @@ VERSION="0.1"
 #/mysql_install_db
 #mysql_secure_installation
 
-header "Installateur de boutique en ligne"
-title "Installation PHP5, ET MODULES"
-sudo apt-get install php5-fpm php5-mysql php5-gd libssh2-php -qy
-title "Correction du fichier php.ini pathinfo=0"
-sed -i "s/^;cgi.fix_pathinfo=1$/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
+title "Creation usager MySQl pour la boutique"
+echo -n "MySQL - "
+mysql -u root -p < conf/initdb.sql 
+
+
+
+#header "Installateur de boutique en ligne"
+#title "Installation PHP5, ET MODULES"
+#sudo apt-get install php5-fpm php5-mysql php5-gd libssh2-php -qy
+#title "Correction du fichier php.ini pathinfo=0"
+#sed -i "s/^;cgi.fix_pathinfo=1$/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
+
 
 # Backup des fichiers d'origine Nginx nginx.conf default
 # copie des fichiers optimisés
 
+# mv ....cp ppppp
+# mv
+
+#title "Restart service PHP & NGINX"
+#service php5-fpm restart
+#service nginx restart
 
 
 
-title "Restart service PHP & NGINX"
-service php5-fpm restart
-service nginx restart
+
+
+
+
+##
+## CREATION DU SWAP DRIVE (A la fin puisque demande un reboot)
+##
+
+
+# title "Creation du Swap drive de 1024"
+# dd if=/dev/zero of=/swapfile bs=1M count=1024
+# mkswap /swapfile
+# swapon /swapfile
+# echo "/swapfile       none    swap    sw      0       0" >> /etc/fstab 
+# echo 10 | sudo tee /proc/sys/vm/swappiness
+# echo vm.swappiness = 10 | sudo tee -a /etc/sysctl.conf
+# sudo chown root:root /swapfile 
+# sudo chmod 0600 /swapfile
+# swapon -s
+# free
 

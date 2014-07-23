@@ -21,9 +21,6 @@ source lib/lib.sh
 
 VERSION="0.1"
 
-# Ajouter mode interractif pour debuter
-#Y/N 
-
 
 #header "Installateur de boutique en ligne"
 #title "Mise a jour du OS"
@@ -71,22 +68,80 @@ VERSION="0.1"
 ## copie des fichiers optimisés
 ##
 
-title "backup de fichier config NGINX d'origine"
-mv /etc/nginx/nginx.conf /etc/nginx/_nginx.conf.origin
-mv /etc/nginx/sites-available/default /etc/nginx/sites-available/_default.origin
+#title "backup de fichier config NGINX d'origine"
+#mv /etc/nginx/nginx.conf /etc/nginx/_nginx.conf.origin
+#mv /etc/nginx/sites-available/default /etc/nginx/sites-available/_default.origin
 
 
-title "Copie des templates optimises"
-cp conf/nginx/nginxE1.conf /etc/nginx/
-mv /etc/nginx/nginxE1.conf /etc/nginx/nginx.conf
+#title "Copie des templates optimises"
+#cp conf/nginx/nginx.conf /etc/nginx/
+#cp conf/nginx/sites-available/default /etc/nginx/sites-available/
 
-cp conf/nginx/sites-available/default_E1 /etc/nginx/sites-available/
-mv /etc/nginx/sites-available/default_E1 /etc/nginx/sites-available/default
+#title "Restart service PHP & NGINX"
+#service php5-fpm restart
+#service nginx restart
 
-title "Restart service PHP & NGINX"
-service php5-fpm restart
-service nginx restart
 
+##
+## DOWNLOAD DERNIERE VERSION WORDPRESS
+##
+
+title "Supression clean html directory"
+rm -rf /usr/share/nginx/html/*
+
+
+title "Download derniere version Wordpress"
+mkdir tmp
+cd tmp
+wget http://wordpress.org/latest.tar.gz
+tar xzvf latest.tar.gz
+cd wordpress
+cp wp-config-sample.php wp-config.php
+sed -i "s/database_name_here/wordpress/g" wp-config.php
+sed -i "s/username_here/wp_admin/g" wp-config.php
+sed -i "s/password_here/wpadmin\&2014/g" wp-config.php
+mkdir wp-content/uploads
+
+cd ..
+rsync -avP wordpress/ /usr/share/nginx/html/
+chown -R www-data:www-data /usr/share/nginx/html/*
+chown -R www-data:www-data /usr/share/nginx/html/wp-content/uploads
+cd ..
+rm -rf tmp
+
+
+
+title "Download and copy WooCommerce"
+apt-get install unzip -qy
+mkdir tmp
+cd tmp
+wget http://downloads.wordpress.org/plugin/woocommerce.zip
+unzip woocommerce.zip 
+cp -R woocommerce /usr/share/nginx/html/wp-content/plugins
+chown -R www-data:www-data /usr/share/nginx/html/*
+cd ..
+rm -rf tmp
+
+
+
+title "Copie de nos themes WP et plugins"
+mkdir tmp
+cp wp/Themes/Mecor/mercor.zip tmp/ 
+cp wp/Themes/DynamiX-WordPress/DynamiX.zip tmp/
+cp wp/Themes/Salient/salient.zip tmp/
+
+cd tmp
+unzip mercor.zip
+unzip DynamiX.zip
+unzip salient.zip
+
+cp -R mercor /usr/share/nginx/html/wp-content/themes
+cp -R DynamiX /usr/share/nginx/html/wp-content/themes
+cp -R salient /usr/share/nginx/html/wp-content/themes
+
+chown -R www-data:www-data /usr/share/nginx/html/wp-content/*
+cd ..
+rm -rf tmp
 
 
 

@@ -144,6 +144,11 @@ cd ..
 rm -rf tmp
 
 
+title "Copie de nos plugins maison"
+cp -R wp/Plugins/Ngxf2b	/usr/share/nginx/html/wp-content/plugins
+chown -R www-data:www-data /usr/share/nginx/html/wp-content/*
+
+
 
 
 

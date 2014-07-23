@@ -54,10 +54,9 @@ VERSION="0.1"
 #/mysql_install_db
 #mysql_secure_installation
 
-title "Creation usager MySQl pour la boutique"
-echo -n "MySQL - "
-mysql -u root -p < conf/initdb.sql 
-
+#title "Creation usager MySQl pour la boutique"
+#echo -n "MySQL - "
+#mysql -u root -p < conf/initdb.sql 
 
 
 #header "Installateur de boutique en ligne"
@@ -67,16 +66,26 @@ mysql -u root -p < conf/initdb.sql
 #sed -i "s/^;cgi.fix_pathinfo=1$/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
 
 
-# Backup des fichiers d'origine Nginx nginx.conf default
-# copie des fichiers optimisés
+##
+## Backup des fichiers d'origine Nginx nginx.conf default
+## copie des fichiers optimisés
+##
 
-# mv ....cp ppppp
-# mv
+title "backup de fichier config NGINX d'origine"
+mv /etc/nginx/nginx.conf /etc/nginx/_nginx.conf.origin
+mv /etc/nginx/sites-available/default /etc/nginx/sites-available/_default.origin
 
-#title "Restart service PHP & NGINX"
-#service php5-fpm restart
-#service nginx restart
 
+title "Copie des templates optimises"
+cp conf/nginx/nginxE1.conf /etc/nginx/
+mv /etc/nginx/nginxE1.conf /etc/nginx/nginx.conf
+
+cp conf/nginx/sites-available/default_E1 /etc/nginx/sites-available/
+mv /etc/nginx/sites-available/default_E1 /etc/nginx/sites-available/default
+
+title "Restart service PHP & NGINX"
+service php5-fpm restart
+service nginx restart
 
 
 

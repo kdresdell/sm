@@ -56,6 +56,8 @@
       $IPTABLES -A INPUT -i lo -j ACCEPT
 
       $IPTABLES -A INPUT -p tcp --dport 2222 -j ACCEPT
+      $IPTABLES -A INPUT -p tcp --dport 80 -j ACCEPT
+      $IPTABLES -A INPUT --source 192.168.1.68 -p tcp --dport 21 -j ACCEPT 
 
       $IPTABLES -A INPUT --source 207.134.128.166 -j ACCEPT
       $IPTABLES -A INPUT --source 207.134.128.6 -j ACCEPT

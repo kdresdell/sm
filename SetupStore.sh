@@ -86,67 +86,84 @@ VERSION="0.1"
 ## DOWNLOAD DERNIERE VERSION WORDPRESS
 ##
 
-title "Supression clean html directory"
-rm -rf /usr/share/nginx/html/*
+#title "Supression clean html directory"
+#rm -rf /usr/share/nginx/html/*
 
 
-title "Download derniere version Wordpress"
-mkdir tmp
-cd tmp
-wget http://wordpress.org/latest.tar.gz
-tar xzvf latest.tar.gz
-cd wordpress
-cp wp-config-sample.php wp-config.php
-sed -i "s/database_name_here/wordpress/g" wp-config.php
-sed -i "s/username_here/wp_admin/g" wp-config.php
-sed -i "s/password_here/wpadmin\&2014/g" wp-config.php
-mkdir wp-content/uploads
+#title "Download derniere version Wordpress"
+#mkdir tmp
+#cd tmp
+#wget http://wordpress.org/latest.tar.gz
+#tar xzvf latest.tar.gz
+#cd wordpress
+#cp wp-config-sample.php wp-config.php
+#sed -i "s/database_name_here/wordpress/g" wp-config.php
+#sed -i "s/username_here/wp_admin/g" wp-config.php
+#sed -i "s/password_here/wpadmin\&2014/g" wp-config.php
+#mkdir wp-content/uploads
 
-cd ..
-rsync -avP wordpress/ /usr/share/nginx/html/
-chown -R www-data:www-data /usr/share/nginx/html/*
-chown -R www-data:www-data /usr/share/nginx/html/wp-content/uploads
-cd ..
-rm -rf tmp
-
-
-
-title "Download and copy WooCommerce"
-apt-get install unzip -qy
-mkdir tmp
-cd tmp
-wget http://downloads.wordpress.org/plugin/woocommerce.zip
-unzip woocommerce.zip 
-cp -R woocommerce /usr/share/nginx/html/wp-content/plugins
-chown -R www-data:www-data /usr/share/nginx/html/*
-cd ..
-rm -rf tmp
+#cd ..
+#rsync -avP wordpress/ /usr/share/nginx/html/
+#chown -R www-data:www-data /usr/share/nginx/html/*
+#chown -R www-data:www-data /usr/share/nginx/html/wp-content/uploads
+#cd ..
+#rm -rf tmp
 
 
 
-title "Copie de nos themes WP et plugins"
-mkdir tmp
-cp wp/Themes/Mecor/mercor.zip tmp/ 
-cp wp/Themes/DynamiX-WordPress/DynamiX.zip tmp/
-cp wp/Themes/Salient/salient.zip tmp/
-
-cd tmp
-unzip mercor.zip
-unzip DynamiX.zip
-unzip salient.zip
-
-cp -R mercor /usr/share/nginx/html/wp-content/themes
-cp -R DynamiX /usr/share/nginx/html/wp-content/themes
-cp -R salient /usr/share/nginx/html/wp-content/themes
-
-chown -R www-data:www-data /usr/share/nginx/html/wp-content/*
-cd ..
-rm -rf tmp
+#title "Download and copy WooCommerce"
+#apt-get install unzip -qy
+#mkdir tmp
+#cd tmp
+#wget http://downloads.wordpress.org/plugin/woocommerce.zip
+#unzip woocommerce.zip 
+#cp -R woocommerce /usr/share/nginx/html/wp-content/plugins
+#chown -R www-data:www-data /usr/share/nginx/html/*
+#cd ..
+#rm -rf tmp
 
 
-title "Copie de nos plugins maison"
-cp -R wp/Plugins/Ngxf2b	/usr/share/nginx/html/wp-content/plugins
-chown -R www-data:www-data /usr/share/nginx/html/wp-content/*
+
+#title "Copie de nos themes WP et plugins"
+#mkdir tmp
+#cp wp/Themes/Mecor/mercor.zip tmp/ 
+#cp wp/Themes/DynamiX-WordPress/DynamiX.zip tmp/
+#cp wp/Themes/Salient/salient.zip tmp/
+
+#cd tmp
+#unzip mercor.zip
+#unzip DynamiX.zip
+#unzip salient.zip
+
+#cp -R mercor /usr/share/nginx/html/wp-content/themes
+#cp -R DynamiX /usr/share/nginx/html/wp-content/themes
+#cp -R salient /usr/share/nginx/html/wp-content/themes
+
+#chown -R www-data:www-data /usr/share/nginx/html/wp-content/*
+#cd ..
+#rm -rf tmp
+
+
+#title "Copie de nos plugins maison"
+#cp -R wp/Plugins/Ngxf2b	/usr/share/nginx/html/wp-content/plugins
+#chown -R www-data:www-data /usr/share/nginx/html/wp-content/*
+
+##
+## Creation FTP pour l'auto-upload des plugins
+##
+
+apt-get install vsftpd -qy
+useradd -d /home/ftpsyncuser -s /bin/bash ftpsyncuser 
+echo -n "Votre password FTP(ftpsyncuser2014) :"
+passwd ftpsyncuser # set password for wordpress when prompted.
+mkdir /home/ftpsyncuser
+chown -R ftpsyncuser:ftpsyncuser /home/ftpsyncuser
+
+sed -i "s/^#local_enable=YES$/local_enable=YES/g" /etc/vsftpd.conf
+sed -i "s/^#write_enable=YES$/write_enable=YES/g" /etc/vsftpd.conf
+
+service vsftpd restart
+
 
 
 

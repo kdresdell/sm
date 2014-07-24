@@ -152,21 +152,55 @@ VERSION="0.1"
 ## Creation FTP pour l'auto-upload des plugins
 ##
 
-apt-get install vsftpd -qy
-useradd -d /home/ftpsyncuser -s /bin/bash ftpsyncuser 
-echo -n "Votre password FTP(ftpsyncuser2014) :"
-passwd ftpsyncuser # set password for wordpress when prompted.
-mkdir /home/ftpsyncuser
-chown -R ftpsyncuser:ftpsyncuser /home/ftpsyncuser
+#apt-get install vsftpd -qy
+#useradd -d /home/ftpsyncuser -s /bin/bash ftpsyncuser 
+#echo -n "Votre password FTP(ftpsyncuser2014) :"
+#passwd ftpsyncuser # set password for wordpress when prompted.
+#mkdir /home/ftpsyncuser
+#chown -R ftpsyncuser:ftpsyncuser /home/ftpsyncuser
 
-sed -i "s/^#local_enable=YES$/local_enable=YES/g" /etc/vsftpd.conf
-sed -i "s/^#write_enable=YES$/write_enable=YES/g" /etc/vsftpd.conf
+#sed -i "s/^#local_enable=YES$/local_enable=YES/g" /etc/vsftpd.conf
+#sed -i "s/^#write_enable=YES$/write_enable=YES/g" /etc/vsftpd.conf
 
-service vsftpd restart
-
-
+#service vsftpd restart
 
 
+##
+## CONFIGURATION POSFIX SMTP GOOGLE
+##
+
+#apt-get install postfix mailutils -qy
+#dpkg-reconfigure postfix
+#echo "kdresdell@gmail.com" > /root/.forward
+
+#postconf -e "relayhost = [smtp.gmail.com]:587"
+#postconf -e "smtp_use_tls=yes"
+#postconf -e "smtp_sasl_auth_enable = yes"
+#postconf -e "smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd"
+#postconf -e "smtp_sasl_security_options ="
+#postconf -e "smtp_generic_maps = hash:/etc/postfix/generic"
+#echo "[smtp.gmail.com]:587 kdresdell@gmail.com:mFrance&2012phileli" > /etc/postfix/sasl_passwd
+#chown root:root /etc/postfix/sasl_passwd
+#chmod 600 /etc/postfix/sasl_passwd
+#postmap /etc/postfix/sasl_passwd
+#echo "root@localhost ken@dresdell.com" >>/etc/postfix/generic 
+#postmap /etc/postfix/generic
+#service postfix restart
+
+
+##
+## INSTALLATION ET CONFIGURATION FAIL2BAN 
+##
+
+title "Installalation et config de Fail2ban"
+apt-get install fail2ban -qy
+
+title "backup de conf"
+mv /etc/fail2ban/jail.conf /etc/fail2ban/_jail.conf.origin 
+
+cp conf/fail2ban/wordpress-auth.conf /etc/fail2ban/filter.d/
+cp conf/fail2ban/jail.conf /etc/fail2ban/
+service fail2ban restart
 
 
 ##

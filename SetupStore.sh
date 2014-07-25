@@ -16,6 +16,16 @@ UpdateOS(){
 	apt-get upgrade -qy
 }
 
+Set_Hostname(){
+	header "Installateur de boutique en ligne"
+	title "Setup Server Hosname"
+	echo -n "Please enter your hostname FQDN :"
+	read hostname
+    echo $hostname > /etc/hostname
+    hostname $hostname
+}
+
+
 
 Set_SSH(){
 	header "Installateur de boutique en ligne"
@@ -229,6 +239,9 @@ VERSION="0.1"
 ARG=$1
 
 
+header "Installateur de boutique en ligne"
+
+
 if [ "$ARG" == "all" ]; then
 	UpdateOS
 else 
@@ -238,6 +251,21 @@ else
 		UpdateOS
 	fi
 fi
+
+
+
+
+if [ "$ARG" == "all" ]; then
+	Set_Hostname
+else 
+	echo -n "Set_Hostname (y/n) :"
+	read a
+	if [ "$a" == "y" ]; then
+		Set_Hostname
+	fi
+fi
+
+
 
 
 if [ "$ARG" == "all" ]; then

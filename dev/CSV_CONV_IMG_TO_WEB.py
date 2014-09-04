@@ -68,6 +68,8 @@ IMG_SCALE_FACTOR = 0.75
 IMG_QUALITY = 50
 IMG_PATH = "OPT_IMG/"
 
+WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -87,6 +89,16 @@ for row in csv2:
 
   print("FileName : ", ImgFileName)
   
+  ##
+  ## CHANGING CSV HEADER DEPENDING ON...
+  ##
+
+  if row[16] != "IMAGE_PRODUIT":
+    IMG_INFO = WEB_URL_PAHT + ImgFileName
+  else:
+  	IMG_INFO = IMAGE_PRODUIT
+
+
   decoded_string = base64.b64decode(Base64_Img) 
   
   f = open(ImgFileName, "wb")
@@ -94,7 +106,17 @@ for row in csv2:
   f.close()
   
   OtimizeImg(ImgFileName)
-  SendToFtp(ImgFileName)
+  #SendToFtp(ImgFileName)
+
+  with open('eggs.csv', 'w', newline='') as csvfile:
+    CVSOUT = csv.writer(csvfile, delimiter=';')
+    
+    ##
+    ## STRUCTURE DU NOUVEAU FICHIER CSV
+    ##
+
+    CVSOUT.writerow([SKU, P_NAME, S_P_Description, IMG_INFO])
+   
 
 
 print("> The End.")

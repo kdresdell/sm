@@ -6,16 +6,13 @@
 ## sudo apt-get install python-pip
 ## sudo pacman -S python-pip
 
-
 # sudo pip install Pillow
-
 
 import csv
 import base64
 import datetime
 import ftplib
 from PIL import Image, ImageFile
-
 
 
 def SendToFtp(ImgFileName):
@@ -27,10 +24,8 @@ def SendToFtp(ImgFileName):
 
 
 
-
-
 def OtimizeImg(ImgFileName):
-  img = Image.open(ImgFileName)
+  img = Image.open("ToDelete/"+ImgFileName)
 
   # get the image's width and height in pixels
   width, height = img.size
@@ -51,21 +46,19 @@ def OtimizeImg(ImgFileName):
 
 
 
-
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #   INPUTS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-F_CATALOG = "WEB.CSV"
+F_CATALOG = "INV_JMD.CSV"
 
 FTP_S = "ftp.sportsjmd.com"
 FTP_U = "ftpsyncuser"
 FTP_P = "monsterinc00"
 
-IMG_SCALE_FACTOR = 0.75
-IMG_QUALITY = 50
+IMG_SCALE_FACTOR = 1
+IMG_QUALITY = 60
 IMG_PATH = "OPT_IMG/"
 
 WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
@@ -73,51 +66,64 @@ WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+csv.field_size_limit(1000000000)
 
+with open('CLEAN_OUT_FILE.csv', 'wb') as csvfile:
+  CVSOUT = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
 
+  csv2 = csv.reader(open(F_CATALOG, "r"), delimiter=';')
+  for row in csv2:
+    INDEX = row[0]
+    DOMAINE = row[1]
+    THEME = row[2]
+    PRODUIT = row[3]
+    MARQUE_MODELE = row[4]
+    DESCRIPTION = row[5]
+    FORMAT = row[6]
+    PRIX_DETAIL = row[7]
+    QT_POUR_RABAIS = row[8]
+    PRIX_VENTE = row[9]
 
-csv2 = csv.reader(open(F_CATALOG, "r"), delimiter=';')
-for row in csv2:
-  SKU = row[0]
-  P_NAME = row[3]
-  S_P_Description = row[5]
-  #L_P_Description = row[4]
-  #R_Price = row[5]
-  #S_Price - row[6]
-  Base64_Img = row[16]
-  ImgFileName = SKU + "-" + P_NAME + ".jpg"
+    TYPE_RABAIS = row[10]
+    DIM_LONGUEUR = row[11]
+    DIM_LARGEUR = row[12]
+    DIM_HAUTEUR = row[13]
+    POID_KG = row[14]
+    F_NON_TRANSPORTABLE = row[15]
+    IMAGE_B64 = row[16]
+    DISPO_INVENTAIRE = row[17]
 
-  print("FileName : ", ImgFileName)
+    ImgFileName = "JMD-" + INDEX + ".jpg"
+
+    print("Image File name is ", ImgFileName)
   
-  ##
-  ## CHANGING CSV HEADER DEPENDING ON...
-  ##
-
-  if row[16] != "IMAGE_PRODUIT":
-    IMG_INFO = WEB_URL_PAHT + ImgFileName
-  else:
-  	IMG_INFO = IMAGE_PRODUIT
-
-
-  decoded_string = base64.b64decode(Base64_Img) 
+    decoded_string = base64.b64decode(IMAGE_B64) 
   
-  f = open(ImgFileName, "wb")
-  f.write(decoded_string)
-  f.close()
+    f = open("ToDelete/" +ImgFileName, "wb")
+    f.write(decoded_string)
+    f.close()
   
-  OtimizeImg(ImgFileName)
-  #SendToFtp(ImgFileName)
+    OtimizeImg(ImgFileName)
+    #SendToFtp(ImgFileName)
 
-  with open('eggs.csv', 'w', newline='') as csvfile:
-    CVSOUT = csv.writer(csvfile, delimiter=';')
-    
-    ##
-    ## STRUCTURE DU NOUVEAU FICHIER CSV
-    ##
+    IMG_URL = WEB_URL_PAHT + ImgFileName
 
-    CVSOUT.writerow([SKU, P_NAME, S_P_Description, IMG_INFO])
-   
+    CVSOUT.writerow([INDEX,DOMAINE,THEME,PRODUIT,MARQUE_MODELE,DESCRIPTION,
+    	             FORMAT,PRIX_DETAIL,QT_POUR_RABAIS,PRIX_VENTE,TYPE_RABAIS,
+    	             DIM_LONGUEUR,DIM_LARGEUR,DIM_HAUTEUR,POID_KG,F_NON_TRANSPORTABLE,DISPO_INVENTAIRE,IMG_URL])
 
 
 print("> The End.")
 
+# PRIX_DETAIL, TYPE_RABAIS,DIM_LONGUEUR, DIM_LARGEUR, DIM_HAUTEUR, POID_KG,F_NON_TRANSPORTABLE, DISPO_INVENTAIRE, ImgFileName])
+  
+## ceci fonctione avec python 3
+
+ # with open('eggs.csv', 'w', newline='\n') as csvfile:
+
+
+#with open('eggs.csv', 'wb') as csvfile:
+#    spamwriter = csv.writer(csvfile, delimiter=' ',
+#                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+#    spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
+#    spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])

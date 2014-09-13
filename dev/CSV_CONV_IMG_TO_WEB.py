@@ -12,6 +12,7 @@ import csv
 import base64
 import datetime
 import ftplib
+import re
 from PIL import Image, ImageFile
 
 
@@ -61,7 +62,7 @@ IMG_SCALE_FACTOR = 1
 IMG_QUALITY = 60
 IMG_PATH = "OPT_IMG/"
 
-WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
+WEB_URL_PAHT = "http://www.sportsjmd.com/OPT_IMG/"
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,6 +71,15 @@ csv.field_size_limit(1000000000)
 
 with open('CLEAN_OUT_FILE.csv', 'wb') as csvfile:
   CVSOUT = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+
+#
+# SI JE VEUX METTRE LES HEADERS DANS LE CSV
+#
+  CVSOUT.writerow(["INDEX","DOMAINE","THEME","PRODUIT","MARQUE_MODELE","DESCRIPTION",
+    	           "FORMAT","PRIX_DETAIL","QT_POUR_RABAIS","PRIX_VENTE","TYPE_RABAIS",
+    	           "DIM_LONGUEUR","DIM_LARGEUR","DIM_HAUTEUR","POID_KG","F_NON_TRANSPORTABLE",
+    	           "IMG_URL","DISPO_INVENTAIRE"])
+
 
   csv2 = csv.reader(open(F_CATALOG, "r"), delimiter=';')
   for row in csv2:
@@ -83,7 +93,6 @@ with open('CLEAN_OUT_FILE.csv', 'wb') as csvfile:
     PRIX_DETAIL = row[7]
     QT_POUR_RABAIS = row[8]
     PRIX_VENTE = row[9]
-
     TYPE_RABAIS = row[10]
     DIM_LONGUEUR = row[11]
     DIM_LARGEUR = row[12]
@@ -110,20 +119,8 @@ with open('CLEAN_OUT_FILE.csv', 'wb') as csvfile:
 
     CVSOUT.writerow([INDEX,DOMAINE,THEME,PRODUIT,MARQUE_MODELE,DESCRIPTION,
     	             FORMAT,PRIX_DETAIL,QT_POUR_RABAIS,PRIX_VENTE,TYPE_RABAIS,
-    	             DIM_LONGUEUR,DIM_LARGEUR,DIM_HAUTEUR,POID_KG,F_NON_TRANSPORTABLE,DISPO_INVENTAIRE,IMG_URL])
+    	             DIM_LONGUEUR,DIM_LARGEUR,DIM_HAUTEUR,POID_KG,F_NON_TRANSPORTABLE,IMG_URL,DISPO_INVENTAIRE])
 
 
 print("> The End.")
 
-# PRIX_DETAIL, TYPE_RABAIS,DIM_LONGUEUR, DIM_LARGEUR, DIM_HAUTEUR, POID_KG,F_NON_TRANSPORTABLE, DISPO_INVENTAIRE, ImgFileName])
-  
-## ceci fonctione avec python 3
-
- # with open('eggs.csv', 'w', newline='\n') as csvfile:
-
-
-#with open('eggs.csv', 'wb') as csvfile:
-#    spamwriter = csv.writer(csvfile, delimiter=' ',
-#                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-#    spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
-#    spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])

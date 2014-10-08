@@ -8,22 +8,25 @@
 
 # sudo pip install Pillow
 
-import util
+#import util
 import json
 import urllib
 import requests
+
+# requests.get('https://kennethreitz.com', verify=True)
+
 
 
 U_ID = "ck_924108a0eed17226f061c654eea68d25"
 U_KEY = "cs_50848f449b04465cdb191d537030ca6b"
 
-response = requests.get('https://www.sportsjmd.com/wc-api/v2/orders',
-                         auth=(U_ID, U_KEY))
+response = requests.get('https://www.sportsjmd.com/wc-api/v2/products?id=1575',
+                         auth=(U_ID, U_KEY), verify=False)
 data = response.json()
+#data = json.loads(content)
 
 
-
-print data
+print(data)
 
 # Set the request URL
 

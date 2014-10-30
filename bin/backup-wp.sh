@@ -3,7 +3,7 @@
 DBNAME="wordpress"
 DBPASSWORD="wpadmin&2014"
 DBUSER="wp_admin"
-BK_PATH="/root/backups/"
+BK_PATH="/home/GoogleDrive/"
 
 DATE=`date +"%Y%m%d"`
 SQLFILE=$BK_PATH$DBNAME-${DATE}.sql
@@ -15,8 +15,6 @@ WEBFILE=$BK_PATH'WEBFILES'-${DATE}.tar.gz
 ##
 
 # 0 2 * * * /root/jmdstore/bin/backup-wp.sh > /dev/null 2>&1
-
-
 
 
 
@@ -36,3 +34,9 @@ gzip $SQLFILE
 tar cvf - /usr/share/nginx/html/ --exclude='*TMP_IMG*' | gzip -9 - > $WEBFILE
 
 
+##
+## Sync with Google Drive
+##
+
+cd $BK_PATH 
+grive

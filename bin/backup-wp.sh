@@ -4,14 +4,20 @@
 
 mysqldump -u wp_admin -p wordpress | nice -n 19 gzip -f > wp-db-backup.sql.gz
 
-
-echo "Database backup done"
- 
-# Backup Files
-# Change directory to where wordpress is contained
+DBNAME="wordpress"
+DBPASSWORD="wpadmin&2014"
+DBUSER="wp_admin"
 
 
-tar czvf wp-backup.tgz /usr/share/nginx/html/
+DATE=`date +"%Y%m%d"`
+SQLFILE=$DBNAME-${DATE}.sql
 
-echo "File backup done"
+mysqldump -u $DBUSER -p\'wpadmin&2014' $DBNAME > $SQLFILE
+#gzip $SQLFILE
+
+
+
+#tar czvf wp-backup.tgz /usr/share/nginx/html/
+
+#echo "File backup done"
 

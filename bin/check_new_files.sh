@@ -10,5 +10,6 @@
 if [ `find /home/ftpsyncuser/ -name "*.csv"` ]
 
 then
-  echo "Nouveau fichier CSV JMD" | mail -s "Nouveau CSV JMD" kdresdell@gmail.com 
+  echo "Nouveau fichier CSV JMD" | mail -s "Nouveau CSV JMD" kdresdell@gmail.com
+  #python /root/jmdstore/dev/csv.... 
 fi

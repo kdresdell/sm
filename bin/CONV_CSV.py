@@ -11,17 +11,11 @@
 import csv
 import base64
 import datetime
-import ftplib
 import re
 from PIL import Image, ImageFile
 
 
-def SendToFtp(ImgFileName):
-  s = ftplib.FTP(FTP_S,FTP_U,FTP_P) 
-  f = open(IMG_PATH+ImgFileName,'rb')               
-  s.storbinary('STOR '+ImgFileName, f)       
-  f.close()          
-  s.quit()
+
 
 
 
@@ -52,17 +46,13 @@ def OtimizeImg(ImgFileName):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-F_CATALOG = "INV_JMD.CSV"
+F_CATALOG = "WEB.CSV"
 
-FTP_S = "ftp.sportsjmd.com"
-FTP_U = "ftpsyncuser"
-FTP_P = "monsterinc00"
 
 IMG_SCALE_FACTOR = 1
 IMG_QUALITY = 60
-IMG_PATH = "OPT_IMG/"
-
-WEB_URL_PAHT = "http://www.sportsjmd.com/OPT_IMG/"
+IMG_PATH = " /usr/share/nginx/html/TMP_IMG/"
+WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,37 +62,41 @@ csv.field_size_limit(1000000000)
 with open('CLEAN_OUT_FILE.csv', 'wb') as csvfile:
   CVSOUT = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
 
-#
-# SI JE VEUX METTRE LES HEADERS DANS LE CSV
-#
-  CVSOUT.writerow(["INDEX","DOMAINE","THEME","PRODUIT","MARQUE_MODELE","DESCRIPTION",
-    	           "FORMAT","PRIX_DETAIL","QT_POUR_RABAIS","PRIX_VENTE","TYPE_RABAIS",
-    	           "DIM_LONGUEUR","DIM_LARGEUR","DIM_HAUTEUR","POID_KG","F_NON_TRANSPORTABLE",
-    	           "IMG_URL","DISPO_INVENTAIRE"])
+  # SI JE VEUX METTRE LES HEADERS DANS LE CSV
+  #
+
+  CVSOUT.writerow(["CODE","DOMAINE","THEME","PRODUIT","MARQUE_MODELE", "GENRE", "DESCRIPTION_1", "DESCRIPTION_2",
+    	           "DESCRIPTION_3", "DESCRIPTION_4", "FORMAT","PRIX_DETAIL","QT_POUR_RABAIS","PRIX_VENTE","TYPE_RABAIS",
+    	           "DIM_1","DIM_2","DIM_3","POID_KG","F_NON_TRANSPORTABLE","DISPO_INVENTAIRE", "IMG_URL"])
 
 
   csv2 = csv.reader(open(F_CATALOG, "r"), delimiter=';')
   for row in csv2:
-    INDEX = row[0]
+    CODE = row[0]
     DOMAINE = row[1]
     THEME = row[2]
     PRODUIT = row[3]
     MARQUE_MODELE = row[4]
-    DESCRIPTION = row[5]
-    FORMAT = row[6]
-    PRIX_DETAIL = row[7]
-    QT_POUR_RABAIS = row[8]
-    PRIX_VENTE = row[9]
-    TYPE_RABAIS = row[10]
-    DIM_LONGUEUR = row[11]
-    DIM_LARGEUR = row[12]
-    DIM_HAUTEUR = row[13]
-    POID_KG = row[14]
-    F_NON_TRANSPORTABLE = row[15]
-    IMAGE_B64 = row[16]
-    DISPO_INVENTAIRE = row[17]
+    GENRE = row[5]
+    DESCRIPTION_1 = row[6]
+    DESCRIPTION_2 = row[7]
+    DESCRIPTION_3 = row[8]
+    DESCRIPTION_4 = row[9]
+    FORMAT = row[10]
+    PRIX_DETAIL = row[11]
+    QT_POUR_RABAIS = row[12]
+    PRIX_VENTE = row[13]
+    TYPE_RABAIS = row[14]
+    DIM_1 = row[15]
+    DIM_2 = row[16]
+    DIM_3 = row[17]
+    POID_KG = row[18]
+    F_NON_TRANSPORTABLE = row[19]
+    DISPO_INVENTAIRE = row[20]
+    IMAGE_B64 = row[21]
+  
 
-    ImgFileName = "JMD-" + INDEX + ".jpg"
+    ImgFileName = "JMD-" + CODE + ".jpg"
 
     print("Image File name is ", ImgFileName)
   
@@ -113,14 +107,11 @@ with open('CLEAN_OUT_FILE.csv', 'wb') as csvfile:
     f.close()
   
     OtimizeImg(ImgFileName)
-    #SendToFtp(ImgFileName)
 
     IMG_URL = WEB_URL_PAHT + ImgFileName
 
-    CVSOUT.writerow([INDEX,DOMAINE,THEME,PRODUIT,MARQUE_MODELE,DESCRIPTION,
-    	             FORMAT,PRIX_DETAIL,QT_POUR_RABAIS,PRIX_VENTE,TYPE_RABAIS,
-    	             DIM_LONGUEUR,DIM_LARGEUR,DIM_HAUTEUR,POID_KG,F_NON_TRANSPORTABLE,IMG_URL,DISPO_INVENTAIRE])
+    CVSOUT.writerow([CODE,DOMAINE,THEME,PRODUIT,MARQUE_MODELE,GENRE,DESCRIPTION_1,DESCRIPTION_2,DESCRIPTION_3,
+    	             DESCRIPTION_4,FORMAT,PRIX_DETAIL,QT_POUR_RABAIS,PRIX_VENTE,TYPE_RABAIS,
+    	             DIM_1,DIM_2,DIM_3,POID_KG,F_NON_TRANSPORTABLE,DISPO_INVENTAIRE,IMG_URL])
 
-
-print("> The End.")
 

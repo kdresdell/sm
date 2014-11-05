@@ -21,6 +21,7 @@ from PIL import Image, ImageFile
 
 
 
+
 def OtimizeImg(ImgFileName):
   img = Image.open(TMP_PATH+ImgFileName)
 
@@ -59,10 +60,7 @@ TMP_PATH = "/home/kdresdell/Desktop/TMP/"
 
 shutil.rmtree(TMP_PATH, ignore_errors=True)
 os.mkdir(TMP_PATH,0755)
-
-## dd/mm/yyyy format
-print (time.strftime("%Y%m%d"))
-TSTAMP = (time.strftime("%Y%m%d"))
+TSTAMP = (time.strftime("%Y%m%d_%H%M%S"))
 
 if len(sys.argv)>1:
   InputFileName = sys.argv[1]

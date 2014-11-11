@@ -5,6 +5,13 @@
 ##
 ## sudo apt-get install python-pip
 ## sudo pacman -S python-pip
+##
+## Ken Dresdell
+## kdresdell@gmail.com
+##
+## Code specifique pour JMD et leur systeme d inventaire
+##
+
 
 # sudo pip install Pillow
 
@@ -21,14 +28,13 @@ from PIL import Image, ImageFile
 
 
 
-
 def OtimizeImg(ImgFileName):
   img = Image.open(TMP_PATH+ImgFileName)
 
   # get the image's width and height in pixels
   width, height = img.size
-  print("W is : ", width)
-  print ("H is : ", height)
+  #print("W is : ", width)
+  #print ("H is : ", height)
   
   # get the largest dimension
   max_dim = max(img.size)
@@ -49,11 +55,13 @@ def OtimizeImg(ImgFileName):
 #FileName = "WEB.CSV"
 IMG_SCALE_FACTOR = 1
 IMG_QUALITY = 60
-IMG_PATH = "/usr/share/nginx/html/TMP_IMG/"
-#IMG_PATH = "/home/kdresdell/Desktop/TMP_IMG/"
+#IMG_PATH = "/usr/share/nginx/html/TMP_IMG/"
+IMG_PATH = "/home/kdresdell/Desktop/TMP_IMG/"
 WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
-CSV_PATH = "/usr/share/nginx/html/CSV_QUEUE/"
-TMP_PATH = "/root/TMP/"
+#CSV_PATH = "/usr/share/nginx/html/CSV_QUEUE/"
+CSV_PATH = "/home/kdresdell/Desktop/CSV_QUEUE/"
+#TMP_PATH = "/root/TMP/"
+TMP_PATH = "/home/kdresdell/Desktop/TMP/"
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,20 +71,20 @@ os.mkdir(TMP_PATH,0755)
 TSTAMP = (time.strftime("%Y%m%d_%H%M%S"))
 
 if len(sys.argv)>1:
-  InputFileName = sys.argv[1]
-  OutputFileName = CSV_PATH +"CLEAN_" + TSTAMP + ".csv" 
 
-  csv.field_size_limit(1000000000)
+  InputFileName = sys.argv[1]
+  OutputFileName = CSV_PATH + "CLEAN_" + TSTAMP + ".csv" 
+
+  csv.field_size_limit(9000000000)
 
   with open(OutputFileName, 'wb') as csvfile:
     CVSOUT = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
 
-    # SI JE VEUX METTRE LES HEADERS DANS LE CSV
-    #
+    # LES HEADERS (TITLE) DU FICHIERS
 
-    CVSOUT.writerow(["CODE","DOMAINE","THEME","PRODUIT","MARQUE_MODELE", "GENRE", "DESCRIPTION_1", "DESCRIPTION_2",
-      	             "DESCRIPTION_3", "DESCRIPTION_4", "FORMAT","PRIX_DETAIL","QT_POUR_RABAIS","PRIX_VENTE","TYPE_RABAIS",
-                     "DIM_1","DIM_2","DIM_3","POID_KG","F_NON_TRANSPORTABLE","DISPO_INVENTAIRE", "IMG_URL"])
+    CVSOUT.writerow(["SKU","TITLE","DOMAINE","THEME","CATEGORY","MARQUE_MODELE", "GENRE","ALL_SPEC","DESC1", "DESC2",
+      	             "DESC3", "DESC4", "FORMAT","PRIX_DETAIL","QT_POUR_RABAIS","PRIX_VENTE","TYPE_RABAIS",
+                     "DIM_1","DIM_2","DIM_3","POID_KG","F_NON_TRANSPORTABLE","DISPO_INVENTAIRE","QT_INV","IMG_URL"])
 
     csv2 = csv.reader(open(InputFileName, "r"), delimiter=';')
     for row in csv2:
@@ -90,6 +98,10 @@ if len(sys.argv)>1:
       DESCRIPTION_2 = row[7]
       DESCRIPTION_3 = row[8]
       DESCRIPTION_4 = row[9]
+      
+      TITLE = PRODUIT + " " + MARQUE_MODELE
+      ALL_SPEC = GENRE + " " + DESCRIPTION_1 + " " + DESCRIPTION_2 + " " + DESCRIPTION_3 + " " + DESCRIPTION_4
+
       FORMAT = row[10]
       PRIX_DETAIL = row[11]
       QT_POUR_RABAIS = row[12]
@@ -101,11 +113,16 @@ if len(sys.argv)>1:
       POID_KG = row[18]
       F_NON_TRANSPORTABLE = row[19]
       DISPO_INVENTAIRE = row[20]
+      if row[20] =="O":
+        QT_INV = 10
+      else:
+        QT_INV = 0
+
       IMAGE_B64 = row[21]
   
       ImgFileName = "JMD-" + CODE + ".jpg"
 
-      print("Image File name is ", ImgFileName)
+      #print("Image File name is ", ImgFileName)
   
       decoded_string = base64.b64decode(IMAGE_B64) 
   
@@ -117,9 +134,10 @@ if len(sys.argv)>1:
 
       IMG_URL = WEB_URL_PAHT + ImgFileName
 
-      CVSOUT.writerow([CODE,DOMAINE,THEME,PRODUIT,MARQUE_MODELE,GENRE,DESCRIPTION_1,DESCRIPTION_2,DESCRIPTION_3,
-        	           DESCRIPTION_4,FORMAT,PRIX_DETAIL,QT_POUR_RABAIS,PRIX_VENTE,TYPE_RABAIS,
-    	               DIM_1,DIM_2,DIM_3,POID_KG,F_NON_TRANSPORTABLE,DISPO_INVENTAIRE,IMG_URL])
+      CVSOUT.writerow([CODE,TITLE,DOMAINE,THEME,PRODUIT,MARQUE_MODELE,GENRE,ALL_SPEC,DESCRIPTION_1,
+      	               DESCRIPTION_2,DESCRIPTION_3,DESCRIPTION_4,FORMAT,PRIX_DETAIL,
+      	               QT_POUR_RABAIS,PRIX_VENTE,TYPE_RABAIS,DIM_1,DIM_2,DIM_3,POID_KG,
+      	               F_NON_TRANSPORTABLE,DISPO_INVENTAIRE,QT_INV,IMG_URL])
 
 
   shutil.rmtree(TMP_PATH, ignore_errors=True)

@@ -49,11 +49,11 @@ def OtimizeImg(ImgFileName):
 #FileName = "WEB.CSV"
 IMG_SCALE_FACTOR = 1
 IMG_QUALITY = 60
-#IMG_PATH = "/usr/share/nginx/html/TMP_IMG/"
-IMG_PATH = "/home/kdresdell/Desktop/TMP_IMG/"
+IMG_PATH = "/usr/share/nginx/html/TMP_IMG/"
+#IMG_PATH = "/home/kdresdell/Desktop/TMP_IMG/"
 WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
-CSV_PATH = "/home/kdresdell/Desktop/"
-TMP_PATH = "/home/kdresdell/Desktop/TMP/"
+CSV_PATH = "/usr/share/nginx/html/CSV_QUEUE/"
+TMP_PATH = "/root/TMP/"
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

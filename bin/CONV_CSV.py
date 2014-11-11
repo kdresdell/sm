@@ -55,13 +55,13 @@ def OtimizeImg(ImgFileName):
 #FileName = "WEB.CSV"
 IMG_SCALE_FACTOR = 1
 IMG_QUALITY = 60
-#IMG_PATH = "/usr/share/nginx/html/TMP_IMG/"
-IMG_PATH = "/home/kdresdell/Desktop/TMP_IMG/"
+IMG_PATH = "/usr/share/nginx/html/TMP_IMG/"
+#IMG_PATH = "/home/kdresdell/Desktop/TMP_IMG/"
 WEB_URL_PAHT = "http://www.sportsjmd.com/TMP_IMG/"
-#CSV_PATH = "/usr/share/nginx/html/CSV_QUEUE/"
-CSV_PATH = "/home/kdresdell/Desktop/CSV_QUEUE/"
-#TMP_PATH = "/root/TMP/"
-TMP_PATH = "/home/kdresdell/Desktop/TMP/"
+CSV_PATH = "/usr/share/nginx/html/CSV_QUEUE/"
+#CSV_PATH = "/home/kdresdell/Desktop/CSV_QUEUE/"
+TMP_PATH = "/root/TMP/"
+#TMP_PATH = "/home/kdresdell/Desktop/TMP/"
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,7 +73,7 @@ TSTAMP = (time.strftime("%Y%m%d_%H%M%S"))
 if len(sys.argv)>1:
 
   InputFileName = sys.argv[1]
-  OutputFileName = CSV_PATH + "CLEAN_" + TSTAMP + ".csv" 
+  OutputFileName = CSV_PATH + "U_WEB.csv" 
 
   csv.field_size_limit(9000000000)
 

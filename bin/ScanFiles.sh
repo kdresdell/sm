@@ -18,10 +18,9 @@ TT=$(date -d "today" +"%Y%m%d%H%M")
 for f in $FILES
 do
   if [ -f $f ]; then
-    echo "Nouveau fichier CSV de JMD" | mail -s "Nouveau CSV JMD" $MAIL_USER
 
     # CONVERTING JMD'S CSV FILE FOR WPALLIMPORT SPEC
-    #/root/jmdstore/bin/CONV_CSV.py  $f
+    /root/jmdstore/bin/CONV_CSV.py  $f
 
     # VALIDE SI LE FICHIER DE CONVERSION EST PRESENT
     if [ -f $U_WEB_FILE ]; then
@@ -30,11 +29,12 @@ do
       curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=18&action=trigger" &
       triggerPID=$!
       #echo "triggerPID is $triggerPID"
-      #echo "Waiting for import......."
+      echo "Nouveau fichier CSV de JMD. PID is $triggerPID" | mail -s "Nouveau $triggerPID CSV JMD" $MAIL_USER
+
       while test -d /proc/$triggerPID; do
-        #echo "Curl processing aux 2 minutes durant l'importation......"
+        echo "Curl processing aux 2 minutes durant l'importation......"
         curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=18&action=processing"
-        sleep 120
+        sleep 60
       done
 
       # JE RENOMME LES FICHIERS AVEC TIME STAMP POUR GARDER UN HISTORIQUE

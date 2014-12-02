@@ -14,14 +14,6 @@ U_WEB_FILE="/usr/share/nginx/html/CSV_QUEUE/U_WEB.csv"
 
 TT=$(date -d "today" +"%Y%m%d%H%M")
 
-
-for f in $FILES
-do
-  if [ -f $f ]; then
-
-    # CONVERTING JMD'S CSV FILE FOR WPALLIMPORT SPEC
-    /root/jmdstore/bin/CONV_CSV.py  $f
-
     # VALIDE SI LE FICHIER DE CONVERSION EST PRESENT
     if [ -f $U_WEB_FILE ]; then
       #echo "There is U_WEB_FILE..................................."
@@ -42,6 +34,4 @@ do
       mv $U_WEB_FILE $DONE_PATH/U_WEB_$TT.csv
 
     fi
-  fi
 
-done

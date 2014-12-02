@@ -113,7 +113,7 @@ if len(sys.argv)>1:
       POID_KG = row[18]
       F_NON_TRANSPORTABLE = row[19]
       DISPO_INVENTAIRE = row[20]
-      if row[20] =="O":
+      if row[20] =="1":
         QT_INV = 10
       else:
         QT_INV = 0

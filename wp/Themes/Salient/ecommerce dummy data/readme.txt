@@ -1,0 +1,1 @@
+This dummy data set includes WooCommerce data - please ensure you have that plugin active prior to importing it or else you'll miss out on that content!

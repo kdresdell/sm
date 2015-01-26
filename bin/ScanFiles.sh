@@ -26,15 +26,17 @@ do
     if [ -f $U_WEB_FILE ]; then
       #echo "There is U_WEB_FILE..................................."
       #echo "Starting the import trigger..........................."
-      curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=18&action=trigger" &
+      ## OLD : curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=18&action=trigger" &
+      curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=19&action=trigger" &
       triggerPID=$!
       #echo "triggerPID is $triggerPID"
       echo "Nouveau fichier CSV de JMD. PID is $triggerPID" | mail -s "Nouveau $triggerPID CSV JMD" $MAIL_USER
 
       while test -d /proc/$triggerPID; do
-        echo "Curl processing aux 2 minutes durant l'importation......"
-        curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=18&action=processing"
-        sleep 60
+        #echo "Curl processing aux 2 minutes durant l'importation......"
+        ## OLD :curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=18&action=processing"
+        curl --insecure "https://www.sportsjmd.com/wp-cron.php?import_key=LhZ0aEx5tfq&import_id=19&action=processing"
+        sleep 120
       done
 
       # JE RENOMME LES FICHIERS AVEC TIME STAMP POUR GARDER UN HISTORIQUE
@@ -45,3 +47,4 @@ do
   fi
 
 done
+
